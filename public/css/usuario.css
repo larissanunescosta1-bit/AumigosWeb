@@ -1,0 +1,55 @@
+ body {
+      background-color: #fff0e4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 400px;
+      padding: 25px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(198, 92, 105, 0.2);
+    }
+
+    h2 {
+      color: #c65c69;
+      font-weight: bold;
+      font-size: 1.8rem;
+    }
+
+    label {
+      color: #c65c69;
+      font-weight: 500;
+    }
+
+    .form-control:focus {
+      border-color: #c65c69;
+      box-shadow: 0 0 5px rgba(198, 92, 105, 0.5);
+    }
+
+    .btn-login {
+      width: 100%;
+      background-color: #c65c69;
+      border: none;
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    .btn-login:hover {
+      background-color: #a94a55;
+    }
+
+    /* Ajustes para telas pequenas */
+    @media (max-width: 576px) {
+      .login-box {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      } }
