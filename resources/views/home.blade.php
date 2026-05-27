@@ -92,6 +92,8 @@
         </div>
       </div>
 
+
+      
       <!-- Ícone usuário -->
       <div class="ms-lg-3 text-center mt-3 mt-lg-0">
         <a href="/usuario">
