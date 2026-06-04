@@ -21,128 +21,123 @@
 
 <body>
  <header>
-    <div class="container py-2">
-      <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
 
-        <div class="col-sm-4 col-lg-3 text-center text-sm-start">
-          <div class="main-logo">
-            <a href="index.html">
-              <img src="images/lg2.png" alt="logo" class="img-fluid">
-            </a>
-          </div>
+  <div class="container py-3">
+    <div class="row align-items-center">
+
+    
+      <div class="col-12 col-lg-3 text-center text-lg-start">
+        <img src="images/lg2.png" class="img-fluid" style="max-height:60px;">
+      </div>
+
+      <!-- TEXTO -->
+      <div class="col-lg-5 d-none d-lg-block text-center">
+        <h5 class="mb-0">Acessórios Para Animais De Estimação</h5>
+      </div>
+
+      <!-- CONTATO -->
+      <div class="col-lg-4 d-none d-lg-flex justify-content-end gap-4 text-end">
+        <div>
+          <small>Telefone</small>
+          <div>+55 37 98736-534</div>
         </div>
-
-       
-        
+        <div>
+          <small>Email</small>
+          <div>aumigos@gmail.com</div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="container-fluid">
-      <hr class="m-0">
-    </div>
+  <hr class="m-0">
+  <!-- NAVBAR -->
+  <div class="container">
+    <nav class="navbar navbar-expand-lg">
 
-    <div class="container">
-     <nav class="main-menu navbar navbar-expand-lg  px-3">
+      <!-- MOBILE TEXTO -->
+      <span class="d-lg-none">Acessórios pets</span>
 
-  
+      <!-- BOTÃO -->
+      <button class="navbar-toggler ms-auto"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#menuMobile">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
- 
-  <button class="navbar-toggler" type="button" 
-          data-bs-toggle="offcanvas" 
-          data-bs-target="#offcanvasNavbar"
-          aria-controls="offcanvasNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+      <!-- MENU DESKTOP -->
+      <div class="collapse navbar-collapse justify-content-center">
 
-  
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
-    
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+              Categorias
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/lacos" class="dropdown-item">Laços</a></li>
+              <li><a href="/bandanas" class="dropdown-item">Bandanas</a></li>
+              <li><a href="/roupas" class="dropdown-item">Roupas</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">Home</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- USUÁRIO -->
+      <div class="d-none d-lg-block ms-auto">
+          <a href="/usuario">
+        <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+         </a>
+      </div>
+
+    </nav>
+  </div>
+
+  <!-- MENU MOBILE -->
+  <div class="offcanvas offcanvas-end" id="menuMobile">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title">Menu</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      <h5>Menu</h5>
+      <button class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
 
     <div class="offcanvas-body">
 
-      <!-- Texto principal -->
-      <div class="me-auto text-center text-lg-start mb-3 mb-lg-0">
-        <h5 class="mb-0">Acessórios para animais de estimação</h5>
-      </div>
-
-      <!-- Menu -->
-      <ul class="navbar-nav mx-auto mb-3 mb-lg-0">
+      <ul class="navbar-nav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"
-             href="#"
-             role="button"
-             data-bs-toggle="dropdown">
-            Categorias Acessórios
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            Categorias
           </a>
 
           <ul class="dropdown-menu">
             <li><a href="/lacos" class="dropdown-item">Laços</a></li>
             <li><a href="/bandanas" class="dropdown-item">Bandanas</a></li>
             <li><a href="/roupas" class="dropdown-item">Roupas</a></li>
-             <li><a href="/" class="dropdown-item">Home</a></li>
           </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
         </li>
       </ul>
 
-      <!-- Contatos -->
-      <div class="d-flex flex-column flex-lg-row gap-3 text-center text-lg-end">
-        <div class="support-box">
-          <span class="text-muted small">Telefone</span>
-          <h6 class="mb-0">+553798736534</h6>
-        </div>
+      <hr>
 
-        <div class="support-box">
-          <span class="text-muted small">Email</span>
-          <h6 class="mb-0">aumigos@gmail.com</h6>
-        </div>
-      </div>
+      <!-- CONTATO MOBILE -->
+      <div class="text-center">
+        <small>Telefone</small>
+        <div>+55 37 98736-534</div>
 
-      <!-- Ícone usuário -->
-      <div class="ms-lg-3 text-center mt-3 mt-lg-0">
-        <a href="/usuario">
-          <iconify-icon 
-            icon="healthicons:person" 
-            class="fs-4">
-          </iconify-icon>
-        </a>
+        <small class="mt-2 d-block">Email</small>
+        <div>aumigos@gmail.com</div>
       </div>
 
     </div>
   </div>
-</nav>
- <div class="isotope-container row">
 
-       
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-    
-
-      
-
-            </div>
-          </div>
-        </div>
-
-      
-
-
-    </div>
-  
-
-
-
-    </div>
-  </header>
+</header>
+ 
   <script src="js/jquery-1.11.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
