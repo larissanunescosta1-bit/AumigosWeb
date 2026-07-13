@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Admin;
+use App\Models\CategoriaProduto;
+use App\Models\Produto;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,10 +18,13 @@ class DatabaseSeeder extends Seeder
      */
    public function run(): void
 {
-    $this->call([
-        AdminSeeder::class,
-        CategoriaProdutoSeeder::class,
-        ProdutoSeeder::class,
-    ]);
+    // Criar 2 admins
+        $admins = Admin::factory(2)->create();
+
+        // Criar 3 categorias
+        $categorias = CategoriaProduto::factory(3)->create();
+
+        // Criar 5 produtos
+        Produto::factory(5)->create();
 }
 }

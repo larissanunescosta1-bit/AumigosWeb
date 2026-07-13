@@ -12,25 +12,25 @@
         <ul class="nav flex-column">
 
             <li class="nav-item">
-                <a href="/perfil" class="nav-link menu-lateral">
+                <a href="{{ route('admin.index') }}" class="nav-link menu-lateral">
                     Gerenciar Perfil
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="/prod" class="nav-link menu-lateral">
+                <a href="{{ route('produto.index') }}" class="nav-link menu-lateral">
                     Gerenciar Produtos
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="/categ" class="nav-link menu-lateral">
+                <a href="{{ route('categoriaProduto.index') }}" class="nav-link menu-lateral">
                     Gerenciar Tipos de Produtos
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="/" class="nav-link menu-lateral voltar-btn">
+                <a href="{{ route('raiz') }}" class="nav-link menu-lateral voltar-btn">
                     Voltar
                 </a>
             </li>

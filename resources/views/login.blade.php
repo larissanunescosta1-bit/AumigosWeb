@@ -18,8 +18,8 @@
   <div class="login-box">
     <h2 class="text-center mb-4">Login</h2>
 
-    <form action="/usuario" method="POST">
-      
+    <form action="/login" method="POST">
+      @csrf
 
       <div class="mb-3">
         <label>Email</label>
@@ -31,9 +31,9 @@
         <input type="password" name="senha" class="form-control" placeholder="Digite sua senha" required>
       </div>
 
-    <a href="/admin" class="btn btn-login">
+   <button type="submit" class="btn btn-login">
     Entrar
-</a>
+</button>
 
     </form>
   </div>
