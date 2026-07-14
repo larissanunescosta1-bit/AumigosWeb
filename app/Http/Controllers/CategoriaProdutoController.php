@@ -10,10 +10,10 @@ class CategoriaProdutoController extends Controller
     // Lista
     public function index()
     {
-        $categorias = CategoriaProduto::paginate(10);
+        $categoriaProdutos = CategoriaProduto::paginate(10);
 
         return view('categoriaProduto.lista', [
-            'categorias' => $categorias,
+             'categoriaProdutos' => $categoriaProdutos,
             'filtro' => ''
         ]);
     }
@@ -33,11 +33,12 @@ class CategoriaProdutoController extends Controller
 
         try {
 
-            $categoria = new CategoriaProduto();
+            $categoriaProduto = new CategoriaProduto();
 
-            $categoria->nome = $request->nome;
+            $categoriaProduto->nome = $request->nome;
+             $categoriaProduto->descricao = $request->descricao;
 
-            $categoria->save();
+            $categoriaProduto->save();
 
             session()->flash('msg', 'Armazenado com sucesso!');
             return redirect()->route('categoriaProduto.index');
@@ -54,10 +55,10 @@ class CategoriaProdutoController extends Controller
     {
         try {
 
-            $categoria = CategoriaProduto::find($id);
+            $categoriaProduto = CategoriaProduto::find($id);
 
             return view('categoriaProduto.visualizar', [
-                'categoria' => $categoria
+                'categoriaProduto' => $categoriaProduto
             ]);
 
         } catch (\Exception $e) {
@@ -76,11 +77,12 @@ class CategoriaProdutoController extends Controller
 
         try {
 
-            $categoria = CategoriaProduto::find($id);
+            $categoriaProduto = CategoriaProduto::find($id);
 
-            $categoria->nome = $request->nome;
+            $categoriaProduto->nome = $request->nome;
+            $categoriaProduto->descricao = $request->descricao;
 
-            $categoria->save();
+            $categoriaProduto->save();
 
             session()->flash('msg', 'Atualizado com sucesso!');
             return redirect()->route('categoriaProduto.index');
@@ -97,9 +99,9 @@ class CategoriaProdutoController extends Controller
     {
         try {
 
-            $categoria = CategoriaProduto::find(decrypt($id));
+            $categoriaProduto = CategoriaProduto::find(decrypt($id));
 
-            $categoria->delete();
+            $categoriaProduto->delete();
 
             session()->flash('msg', 'Registro excluído com sucesso!');
             return redirect()->route('categoriaProduto.index');
@@ -116,13 +118,14 @@ class CategoriaProdutoController extends Controller
     {
         $filtro = trim((string) $request->input('filtro', ''));
 
-        $categorias = CategoriaProduto::where('nome', 'like', "%{$filtro}%")
-            ->orderBy('id')
-            ->paginate(10);
+        $categoriaProdutos = CategoriaProduto::where('nome', 'like', "%{$filtro}%")
+    ->orderBy('id')
+    ->paginate(10);
 
-        return view('categoriaProduto.lista', [
-            'categorias' => $categorias,
-            'filtro' => $filtro
-        ]);
+return view('categoriaProduto.lista', [
+    'categoriaProdutos' => $categoriaProdutos,
+    'filtro' => $filtro
+]);
+       
     }
 }

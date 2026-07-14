@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produto;
-
+use App\Models\CategoriaProduto;
+use App\Models\Admin;
 class ProdutoController extends Controller
 {
     // Lista os produtos
     public function index()
     {
-        $produtos = Produto::paginate(10);
+        $produtos = Produto::with(['categoria', 'admin'])->paginate(10);
 
         return view('produto.lista', [
             'produtos' => $produtos,
@@ -21,7 +22,10 @@ class ProdutoController extends Controller
     // Formulário de cadastro
     public function create()
     {
-        return view('produto.cria');
+         $categorias = CategoriaProduto::all();
+    $admins = Admin::all();
+    return view('produto.cria', compact('categorias', 'admins'));
+       
     }
 
     // Salva um novo produto
@@ -29,31 +33,41 @@ class ProdutoController extends Controller
     {
         $request->validate([
             'nome' => 'required|max:100',
-            'preco' => 'required',
-            'descricao' => 'required',
-            'categoria_produto_id' => 'required',
-        ]);
+            'descricaoCurta' => 'required|max:255',
+        'descricaoGeral' => 'required',
+        'precoReferencia' => 'required|numeric',
+        'imagem' => 'required|image|max:2048',
+        'categoria_produtos_id' => 'required|exists:categoria_produtos,id',
+        'admin_id' => 'required|exists:admins,id',
+    ]);
 
-        try {
+    try {
 
-            $produto = new Produto();
+        $produto = new Produto();
 
-            $produto->nome = $request->nome;
-            $produto->preco = $request->preco;
-            $produto->descricao = $request->descricao;
-            $produto->categoria_produto_id = $request->categoria_produto_id;
+        $produto->nome = $request->nome;
+        $produto->descricaoCurta = $request->descricaoCurta;
+        $produto->descricaoGeral = $request->descricaoGeral;
+        $produto->precoReferencia = $request->precoReferencia;
+        $produto->categoria_produtos_id = $request->categoria_produtos_id;
+        $produto->admin_id = $request->admin_id;
 
-            $produto->save();
-
-            session()->flash('msg', 'Armazenado com sucesso!');
-            return redirect()->route('produto.index');
-
-        } catch (\Exception $e) {
-
-            session()->flash('erro', 'Erro ao armazenar: ' . $e->getMessage());
-            return redirect()->route('produto.create');
+        if ($request->hasFile('imagem')) {
+            $produto->imagem = $request->file('imagem')->store('produtos', 'public');
         }
+
+        $produto->save();
+
+        session()->flash('msg', 'Armazenado com sucesso!');
+        return redirect()->route('produto.index');
+
+    } catch (\Exception $e) {
+
+        session()->flash('erro', 'Erro ao armazenar: ' . $e->getMessage());
+        return redirect()->route('produto.create');
     }
+}
+    
 
     // Visualizar produto
     public function view($id)
@@ -61,10 +75,9 @@ class ProdutoController extends Controller
         try {
 
             $produto = Produto::find($id);
-
-            return view('produto.visualizar', [
-                'produto' => $produto
-            ]);
+ $categorias = CategoriaProduto::all();
+        $admins = Admin::all();
+            return view('produto.visualizar', compact('produto','categorias','admins'));
 
         } catch (\Exception $e) {
 
@@ -78,30 +91,46 @@ class ProdutoController extends Controller
     {
         $request->validate([
             'nome' => 'required|max:100',
-            'preco' => 'required',
-            'descricao' => 'required',
-            'categoria_produto_id' => 'required',
-        ]);
+            'descricaoCurta' => 'required|max:255',
+        'descricaoGeral' => 'required',
+        'precoReferencia' => 'required|numeric',
+        'imagem' => 'nullable|image|max:2048',
+        'categoria_produtos_id' => 'required|exists:categoria_produtos,id',
+        'admin_id' => 'required|exists:admins,id',
+    ]);
 
-        try {
+    try {
 
-            $produto = Produto::find($id);
+        $produto = Produto::find($id);
 
-            $produto->nome = $request->nome;
-            $produto->preco = $request->preco;
-            $produto->descricao = $request->descricao;
-            $produto->categoria_produto_id = $request->categoria_produto_id;
+        $produto->nome = $request->nome;
+        $produto->descricaoCurta = $request->descricaoCurta;
+        $produto->descricaoGeral = $request->descricaoGeral;
+        $produto->precoReferencia = $request->precoReferencia;
+        $produto->categoria_produtos_id = $request->categoria_produtos_id;
+        $produto->admin_id = $request->admin_id;
 
-            $produto->save();
+        // Atualiza a imagem somente se uma nova for enviada
+        if ($request->hasFile('imagem')) {
 
-            session()->flash('msg', 'Atualizado com sucesso!');
-            return redirect()->route('produto.index');
+            // Remove a imagem antiga (caso exista)
+            if (!empty($produto->imagem) && \Storage::disk('public')->exists($produto->imagem)) {
+                \Storage::disk('public')->delete($produto->imagem);
+            }
 
-        } catch (\Exception $e) {
-
-            session()->flash('erro', 'Erro ao atualizar: ' . $e->getMessage());
-            return redirect()->route('produto.view', $id);
+            $produto->imagem = $request->file('imagem')->store('produtos', 'public');
         }
+
+        $produto->save();
+
+        session()->flash('msg', 'Atualizado com sucesso!');
+        return redirect()->route('produto.index');
+
+    } catch (\Exception $e) {
+
+        session()->flash('erro', 'Erro ao atualizar: ' . $e->getMessage());
+        return redirect()->route('produto.view', $id);
+    }
     }
 
     // Excluir produto

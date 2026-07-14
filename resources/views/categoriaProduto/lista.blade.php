@@ -10,7 +10,19 @@
         <a  class="btn btn-primary" href="{{ route('categoriaProduto.create') }}">Criar nova categoria</a>
         <br><br>
     </div>
-     <form class="mb-3" method="GET" action="{{ route('categoria.search') }}">
+
+      @if(session('msg'))
+        <div class="alert alert-success">
+            {{ session('msg') }}
+        </div>
+    @endif
+
+    @if(session('erro'))
+        <div class="alert alert-danger">
+            {{ session('erro') }}
+        </div>
+    @endif
+     <form class="mb-3" method="GET" action="{{ route('categoriaProduto.search') }}">
         <div class="input-group">
             <input id="filtro" name="filtro" class="form-control" type="text" placeholder="Pesquisar..." value="{{ $filtro ?? '' }}" autofocus>
             <button class="btn btn-primary" type="submit">Pesquisar</button>
@@ -28,13 +40,13 @@
         </thead>
 
         <tbody>
-              @foreach($categoriaProdutos as $categoriaProdutos)
+              @foreach($categoriaProdutos as $categoriaProduto)
             <tr>
                 <td>{{ $categoriaProduto->id }}</td>
                 <td>{{ $categoriaProduto->nome }}</td>
                 <td>{{ $categoriaProduto->descricao }}</td>
                 <td>
-     <a title="Editar"  class="btn btn-warning btn-sm"  href="{{ route('categoriaProduto.view', encrypt($categoriaProduto->id)) }}">Editar</a>
+     <a title="Editar"  class="btn btn-warning btn-sm"  href="{{ route('categoriaProduto.view', $categoriaProduto->id) }}">Editar</a>
 
           <a title="Excluir"class="btn btn-danger btn-sm  btn-sm btn-excluir" href="{{ route('categoriaProduto.destroy', encrypt($categoriaProduto->id)) }}">Excluir</a>
                 </td>

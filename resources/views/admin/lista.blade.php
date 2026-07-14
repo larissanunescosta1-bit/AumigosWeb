@@ -14,7 +14,17 @@
         <a  class="btn btn-primary" href="{{ route('admin.create') }}">Criar novo perfil</a>
         <br><br>
     </div>
+  @if(session('msg'))
+        <div class="alert alert-success">
+            {{ session('msg') }}
+        </div>
+    @endif
 
+    @if(session('erro'))
+        <div class="alert alert-danger">
+            {{ session('erro') }}
+        </div>
+    @endif
      <form class="mb-3" method="GET" action="{{ route('admin.search') }}">
         <div class="input-group">
             <input id="filtro" name="filtro" class="form-control" type="text" placeholder="Pesquisar..." value="{{ $filtro ?? '' }}" autofocus>

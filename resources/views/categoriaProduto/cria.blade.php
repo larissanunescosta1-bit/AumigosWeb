@@ -7,7 +7,7 @@
 <!--cadastro de  tipo produto-->
     <h4 class="mb-3">Cadastrar Tipo de Produto</h4>
 
-    <form  action="{{ route('categoriaProduto.store') }}" method="POST" class="needs-validation">
+    <form  action="{{ route('categoriaProduto.store') }}" method="POST" class="needs-validation"  novalidate enctype="multipart/form-data">
          @csrf
         <div class="mb-3">
             <label>Nome</label>

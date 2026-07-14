@@ -5,9 +5,13 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriaProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
+use App\Models\Produto;
 
 Route::get('/', function () {
-    return view('index');
+
+    $produtos = Produto::with('categoria')->get();
+    return view('index', compact('produtos'));
+
 })->name('raiz');
 
 # ROTAS DE PRODUTO ================================================================================

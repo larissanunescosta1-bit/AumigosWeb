@@ -6,16 +6,14 @@
 
     <h3 class="mb-3">Editar Tipo de Produto</h3>
 
-    <form action="{{ route('categoriaProduto.update', encrypt($categoriaProduto->id)) }}" method="POST">
+    <form action="{{ route('categoriaProduto.update', ['id' => $categoriaProduto->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label>Nome</label>
-            <input type="text"class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome', $tipoproduto->nome) }}" placeholder="Digite o nome do tipo" required>
-             @error('nome')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
+            <input type="text"class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome', $categoriaProduto->nome) }}" placeholder="Digite o nome do tipo" required>
+           <div class="invalid-feedback">
+                @error('nome') {{ $message }} @enderror
+            </div>
         </div>
 
         <div class="mb-3">
@@ -28,11 +26,9 @@
                 placeholder="Digite a descrição"
                 required>
 
-            @error('descricao')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
+             <div class="invalid-feedback">
+                @error('descricao') {{ $message }} @enderror
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">
