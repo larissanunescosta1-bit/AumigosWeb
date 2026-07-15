@@ -166,4 +166,18 @@ class ProdutoController extends Controller
             'filtro' => $filtro
         ]);
     }
+
+
+    public function categoria($id)
+{
+    $categorias = CategoriaProduto::all();
+
+    $produtos = Produto::where('categoria_produtos_id', $id)
+        ->with('categoria')
+        ->get();
+
+    return view('index', compact('produtos', 'categorias'));
+}
+
+
 }

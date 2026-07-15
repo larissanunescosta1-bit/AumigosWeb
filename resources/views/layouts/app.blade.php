@@ -10,8 +10,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="css/vendor.css">
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
+<link rel="stylesheet" href="{{ asset('style.css') }}">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
 
     
       <div class="col-12 col-lg-3 text-center text-lg-start">
-        <img src="images/lg2.png" class="img-fluid" style="max-height:60px;">
+        <img src="{{ asset('images/lg2.png') }}" class="img-fluid" style="max-height:60px;">
       </div>
 
       <!-- TEXTO -->
@@ -74,13 +74,13 @@
               Categorias
             </a>
             <ul class="dropdown-menu">
-              <li><a href="/lacos" class="dropdown-item">Laços</a></li>
-              <li><a href="/bandanas" class="dropdown-item">Bandanas</a></li>
-              <li><a href="/roupas" class="dropdown-item">Roupas</a></li>
+              @foreach($categorias as $categoria)
+              <li><a href="{{ route('categoria', $categoria->id) }}" class="dropdown-item"> {{ $categoria->nome }}</a></li>
+                 @endforeach
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/" class="nav-link">Home</a>
+            <a href="" class="nav-link">Home</a>
           </li>
         </ul>
       </div>
@@ -137,7 +137,7 @@
   </div>
 
 </header>
- 
+ @yield('content')
   <script src="js/jquery-1.11.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -147,7 +147,7 @@
   <script src="js/script.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
-@yield('content')
+
 
 
 

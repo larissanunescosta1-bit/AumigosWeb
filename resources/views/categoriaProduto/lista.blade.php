@@ -3,6 +3,9 @@
 @section('content')
 
 <div class="container mt-4 container-box">
+    <div class="mb-3">
+        <a class="btn btn-secondary" href="{{ route('perfilAdmin') }}"> ← Voltar ao Menu </a>
+    </div>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Tipos de Produto</h2>

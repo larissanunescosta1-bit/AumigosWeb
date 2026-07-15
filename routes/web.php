@@ -5,14 +5,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriaProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
-use App\Models\Produto;
+Route::get('/', [SiteController::class, 'index'])->name('home');
+Route::get('/login', [SiteController::class, 'login'])->name('login');
+Route::get('/perfilAdmin', [SiteController::class, 'perfilAdmin'])->name('perfilAdmin');
+Route::get('/categoria/{id}', [ProdutoController::class, 'categoria'])
+    ->name('categoria');
 
-Route::get('/', function () {
-
-    $produtos = Produto::with('categoria')->get();
-    return view('index', compact('produtos'));
-
-})->name('raiz');
 
 # ROTAS DE PRODUTO ================================================================================
 Route::get('/produto',                 [ProdutoController::class, 'index'])->name('produto.index');
@@ -22,6 +20,9 @@ Route::get('/produto/{id}/view',       [ProdutoController::class, 'view'])->name
 Route::post('/produto/{id}/update',    [ProdutoController::class, 'update'])->name('produto.update');
 Route::get('/produto/{id}/destroy',    [ProdutoController::class, 'destroy'])->name('produto.destroy');
 Route::get('/produto/search',          [ProdutoController::class, 'search'])->name('produto.search');
+
+
+
 
 # ROTAS DE CATEGORIA DE PRODUTO ===================================================================
 Route::get('/categoriaProduto',                [CategoriaProdutoController::class, 'index'])->name('categoriaProduto.index');
@@ -43,6 +44,3 @@ Route::get('/admin/search',          [AdminController::class, 'search'])->name('
 
 
 
-
-Route::get('/login', [SiteController::class, 'login'])->name('login');
-Route::get('/perfilAdmin', [SiteController::class, 'perfilAdmin'])->name('perfilAdmin');

@@ -30,7 +30,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('raiz') }}" class="nav-link menu-lateral voltar-btn">
+                <a href="{{ route('home') }}" class="nav-link menu-lateral voltar-btn">
                     Voltar
                 </a>
             </li>

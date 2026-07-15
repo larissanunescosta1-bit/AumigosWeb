@@ -27,7 +27,7 @@
         </div>
     </div>
 </header>
-
+<script src="{{ asset('js/confirmarexclusao.js') }}"></script>
 @yield('content')
 
 </body>

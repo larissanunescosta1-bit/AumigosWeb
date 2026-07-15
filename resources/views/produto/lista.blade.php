@@ -7,6 +7,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
 
 <div class="container container-box">
+     <div class="mb-3">
+        <a class="btn btn-secondary" href="{{ route('perfilAdmin') }}"> ← Voltar ao Menu</a>
+    </div>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Produtos</h2>
