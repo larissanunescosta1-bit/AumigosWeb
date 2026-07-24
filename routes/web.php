@@ -1,13 +1,21 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoriaProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 Route::get('/', [SiteController::class, 'index'])->name('home');
-Route::get('/login', [SiteController::class, 'login'])->name('login');
-Route::get('/perfilAdmin', [SiteController::class, 'perfilAdmin'])->name('perfilAdmin');
+Route::get('/meulogin', [SiteController::class, 'meulogin'])
+    ->name('meulogin');
+Route::get('/perfilAdmin', [SiteController::class, 'perfilAdmin'])->middleware('auth')->name('perfilAdmin');
 Route::get('/categoria/{id}', [ProdutoController::class, 'categoria'])
     ->name('categoria');
 
@@ -34,13 +42,11 @@ Route::get('/categoriaProduto/{id}/destroy',   [CategoriaProdutoController::clas
 Route::get('/categoriaProduto/search',         [CategoriaProdutoController::class, 'search'])->name('categoriaProduto.search');
 
 # ROTAS DE ADMIN ==================================================================================
-Route::get('/admin',                 [AdminController::class, 'index'])->name('admin.index');
-Route::get('/admin/create',          [AdminController::class, 'create'])->name('admin.create');
-Route::post('/admin',                [AdminController::class, 'store'])->name('admin.store');
-Route::get('/admin/{id}/view',       [AdminController::class, 'view'])->name('admin.view');
-Route::post('/admin/{id}/update',    [AdminController::class, 'update'])->name('admin.update');
-Route::get('/admin/{id}/destroy',    [AdminController::class, 'destroy'])->name('admin.destroy');
-Route::get('/admin/search',          [AdminController::class, 'search'])->name('admin.search');
-
-
-
+Route::get('/admin',                 [UserController::class, 'index'])->name('admin.index');
+Route::get('/admin/create',          [UserController::class, 'create'])->name('admin.create');
+Route::post('/admin',                [UserController::class, 'store'])->name('admin.store');
+Route::get('/admin/{id}/view',       [UserController::class, 'view'])->name('admin.view');
+Route::post('/admin/{id}/update',    [UserController::class, 'update'])->name('admin.update');
+Route::get('/admin/{id}/destroy',    [UserController::class, 'destroy'])->name('admin.destroy');
+Route::get('/admin/search',          [UserController::class, 'search'])->name('admin.search');
+require __DIR__.'/auth.php';

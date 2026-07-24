@@ -9,9 +9,9 @@
     @csrf
     <div class="mb-3">
         <label>Nome</label>
-        <input type="text" name="nome" class="form-control  @error('nome') is-invalid @enderror" id="nome" name="nome" value="{{ old('nome', $admin->nome) }}" required>
+        <input type="text" name="name" class="form-control  @error('name') is-invalid @enderror" id="name"  value="{{ old('name', $admin->name) }}" required>
     <div class="invalid-feedback">
-                @error('nome') {{ $message }} @enderror
+                @error('name') {{ $message }} @enderror
             </div>
    
     </div>
@@ -26,9 +26,9 @@
 
     <div class="mb-3">
         <label>Senha</label>
-        <input type="password" name="senha" class="form-control  @error('senha') is-invalid @enderror" id="senha" name="senha" value="{{ old('senha', $admin->password) }}" required >
+        <input type="password" name="password" class="form-control  @error('password') is-invalid @enderror" id="password" value="{{ old('password', $admin->password) }}" required >
    <div class="invalid-feedback">
-                @error('senha') {{ $message }} @enderror
+                @error('password') {{ $message }} @enderror
             </div>
     </div>
 

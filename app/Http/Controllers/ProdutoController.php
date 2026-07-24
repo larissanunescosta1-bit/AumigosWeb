@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\CategoriaProduto;
-use App\Models\Admin;
+use App\Models\User;
 class ProdutoController extends Controller
 {
     // Lista os produtos
     public function index()
     {
-        $produtos = Produto::with(['categoria', 'admin'])->paginate(10);
+        $produtos = Produto::with(['categoria', 'user'])->paginate(10);
 
         return view('produto.lista', [
             'produtos' => $produtos,
@@ -23,7 +23,7 @@ class ProdutoController extends Controller
     public function create()
     {
          $categorias = CategoriaProduto::all();
-    $admins = Admin::all();
+    $admins = User::all();
     return view('produto.cria', compact('categorias', 'admins'));
        
     }
@@ -38,7 +38,7 @@ class ProdutoController extends Controller
         'precoReferencia' => 'required|numeric',
         'imagem' => 'required|image|max:2048',
         'categoria_produtos_id' => 'required|exists:categoria_produtos,id',
-        'admin_id' => 'required|exists:admins,id',
+        'user_id' => 'required|exists:users,id',
     ]);
 
     try {
@@ -50,7 +50,7 @@ class ProdutoController extends Controller
         $produto->descricaoGeral = $request->descricaoGeral;
         $produto->precoReferencia = $request->precoReferencia;
         $produto->categoria_produtos_id = $request->categoria_produtos_id;
-        $produto->admin_id = $request->admin_id;
+        $produto->user_id = $request->user_id;
 
         if ($request->hasFile('imagem')) {
             $produto->imagem = $request->file('imagem')->store('produtos', 'public');
@@ -76,7 +76,7 @@ class ProdutoController extends Controller
 
             $produto = Produto::find($id);
  $categorias = CategoriaProduto::all();
-        $admins = Admin::all();
+        $admins = User::all();
             return view('produto.visualizar', compact('produto','categorias','admins'));
 
         } catch (\Exception $e) {
@@ -96,7 +96,7 @@ class ProdutoController extends Controller
         'precoReferencia' => 'required|numeric',
         'imagem' => 'nullable|image|max:2048',
         'categoria_produtos_id' => 'required|exists:categoria_produtos,id',
-        'admin_id' => 'required|exists:admins,id',
+        'user_id' => 'required|exists:users,id',
     ]);
 
     try {
@@ -108,7 +108,7 @@ class ProdutoController extends Controller
         $produto->descricaoGeral = $request->descricaoGeral;
         $produto->precoReferencia = $request->precoReferencia;
         $produto->categoria_produtos_id = $request->categoria_produtos_id;
-        $produto->admin_id = $request->admin_id;
+        $produto->user_id = $request->user_id;
 
         // Atualiza a imagem somente se uma nova for enviada
         if ($request->hasFile('imagem')) {

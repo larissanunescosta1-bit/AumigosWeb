@@ -90,7 +90,7 @@
                <td> {{ $produto->categoria?->nome ?? '-' }}</td>
 
                 <td>
-    {{ $produto->admin?->nome ?? '-' }}
+    {{ $produto->user?->name ?? '-' }}
 </td>
 
                 <td>

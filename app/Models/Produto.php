@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
 
 class Produto extends Model
 {
@@ -27,8 +28,8 @@ class Produto extends Model
     }
 
     // relacionamentode  produto pertence a admin
-    public function admin()
+    public function user()
     {
-        return $this->belongsTo(Admin::class, 'admin_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

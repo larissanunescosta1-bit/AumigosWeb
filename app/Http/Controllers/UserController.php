@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class UserController extends Controller
 {
     // Lista os administradores
     public function index()
     {
-        $admins = Admin::paginate(10);
+       $admins = User::paginate(10);
 
         return view('admin.lista', [
             'admins' => $admins,
@@ -28,18 +29,18 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome'  => 'required|max:20',
+            'name'  => 'required|max:20',
             'email' => 'required',
-            'senha' => 'required',
+            'password' => 'required',
         ]);
 
         try {
 
-            $admin = new Admin();
+            $admin = new User();
 
-            $admin->nome = $request->nome;
+            $admin->name = $request->name;
             $admin->email = $request->email;
-            $admin->password = $request->senha;
+            $admin->password = Hash::make($request->password);
 
             $admin->save();
 
@@ -58,7 +59,7 @@ class AdminController extends Controller
     {
        try {
 
-       $admin = Admin::find($id);  
+       $admin = User::find($id);  
  return view('admin.visualizar', [
             'admin' => $admin
         ]);
@@ -74,18 +75,18 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nome'  => 'required|max:20',
+            'name'  => 'required|max:20',
             'email' => 'required',
-            'senha' => 'required',
+            'password' => 'required',
         ]);
 
         try {
 
-             $admin = Admin::find($id);
+             $admin = User::find($id);
 
-            $admin->nome = $request->nome;
+            $admin->name = $request->name;
             $admin->email = $request->email;
-            $admin->password = $request->senha;
+             $admin->password = Hash::make($request->password);
 
             $admin->save();
 
@@ -104,7 +105,7 @@ class AdminController extends Controller
     {
         try {
 
-            $admin = Admin::find(decrypt($id));
+            $admin = User::find(decrypt($id));
 
             $admin->delete();
 
@@ -123,7 +124,7 @@ class AdminController extends Controller
     {
         $filtro = trim((string) $request->input('filtro', ''));
 
-        $admins = Admin::where('nome', 'like', "%{$filtro}%")
+        $admins = User::where('nome', 'like', "%{$filtro}%")
             ->orderBy('id')
             ->paginate(10);
 

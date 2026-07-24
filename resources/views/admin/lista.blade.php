@@ -49,7 +49,7 @@
             @foreach($admins as $admin)
             <tr>
                 <td>{{ $admin->id }}</td>
-                <td>{{ $admin->nome }}</td>
+                <td>{{ $admin->name }}</td>
                 <td>{{ $admin->email }}</td>
                 <td>
                 

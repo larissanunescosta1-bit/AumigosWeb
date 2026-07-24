@@ -22,7 +22,7 @@ return new class extends Migration
     // aqui são as chaves estrangeiras da tabela
     // sempre tem que colocar a tabela depois o foreignId com o id das outras tabelas e depois o constrained 
     $table->foreignId('categoria_produtos_id')->constrained('categoria_produtos');
-    $table->foreignId('admin_id')->constrained('admins');
+    $table->foreignId('user_id')->constrained('users');
 
     $table->timestamps();
         $table->softDeletes();

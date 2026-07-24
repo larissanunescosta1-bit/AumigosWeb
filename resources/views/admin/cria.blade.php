@@ -11,9 +11,9 @@
          @csrf
     <div class="mb-3">
             <label>Nome</label>
-            <input type="text" class="form-control  @error('nome') is-invalid @enderror" id="nome" value="{{ old('nome') }}" name="nome"  placeholder="Digite o nome" required>
+            <input type="text" class="form-control  @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" name="name"  placeholder="Digite o nome" required>
          <div class="invalid-feedback">
-                @error('nome') {{ $message }} @enderror
+                @error('name') {{ $message }} @enderror
             </div>
         
         </div>
@@ -32,9 +32,9 @@
             <label>Senha</label>
             <input 
                 type="password" 
-                class="form-control   @error('senha') is-invalid @enderror" id="senha" value="{{ old('senha') }}" name="senha"  placeholder="Digite a senha" required>
+                class="form-control   @error('password') is-invalid @enderror" id="password" value="{{ old('password') }}" name="password"  placeholder="Digite a senha" required>
          <div class="invalid-feedback">
-                @error('senha') {{ $message }} @enderror
+                @error('password') {{ $message }} @enderror
             </div>
             </div>
 

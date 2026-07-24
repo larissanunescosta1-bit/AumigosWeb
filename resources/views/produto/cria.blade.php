@@ -108,20 +108,20 @@
     <div class="mb-3">
         <label>Administrador</label>
         <select class="form-control @error('admin_id') is-invalid @enderror"
-                name="admin_id"
+                name="user_id"
                 required>
             <option value="">Selecione um administrador</option>
 
             @foreach($admins as $admin)
-                <option value="{{ $admin->id }}"
-                    {{ old('admin_id') == $admin->id ? 'selected' : '' }}>
-                    {{ $admin->nome }}
+               <option value="{{ $admin->id }}">
+                    {{ old('user_id') == $admin->id ? 'selected' : '' }}>
+                    {{ $admin->name }}
                 </option>
             @endforeach
         </select>
 
         <div class="invalid-feedback">
-            @error('admin_id') {{ $message }} @enderror
+            @error('user_id') {{ $message }} @enderror
         </div>
     </div>
 

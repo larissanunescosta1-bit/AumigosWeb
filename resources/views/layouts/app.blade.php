@@ -87,7 +87,7 @@
 
       <!-- USUÁRIO -->
       <div class="d-none d-lg-block ms-auto">
-          <a href="{{ route('login') }}">
+          <a href="{{ route('meulogin') }}">
         <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
          </a>
       </div>

@@ -116,21 +116,21 @@
         <div class="mb-3">
             <label>Administrador</label>
 
-            <select class="form-control @error('admin_id') is-invalid @enderror"
-                    name="admin_id"
+            <select class="form-control @error('user_id') is-invalid @enderror"
+                    name="user_id"
                     required>
 
                 @foreach($admins as $admin)
                     <option value="{{ $admin->id }}"
-                        {{ old('admin_id', $produto->admin_id) == $admin->id ? 'selected' : '' }}>
-                        {{ $admin->nome }}
+                        {{ old('user_id', $produto->user_id) == $admin->id ? 'selected' : '' }}>
+                        {{ $admin->name }}
                     </option>
                 @endforeach
 
             </select>
 
             <div class="invalid-feedback">
-                @error('admin_id') {{ $message }} @enderror
+                @error('user_id') {{ $message }} @enderror
             </div>
         </div>
 

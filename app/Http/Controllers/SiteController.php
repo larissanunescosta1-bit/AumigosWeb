@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class SiteController extends Controller
 {
    
-    public function login() {
-        return view('login');
+    public function meulogin() {
+        return view('meulogin');
     }
 
      public function perfilAdmin()
