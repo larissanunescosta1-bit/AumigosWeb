@@ -140,6 +140,10 @@ class ProdutoController extends Controller
 
             $produto = Produto::find(decrypt($id));
 
+            if (!empty($produto->imagem) && \Storage::disk('public')->exists($produto->imagem)) {
+          \Storage::disk('public')->delete($produto->imagem);
+}
+
             $produto->delete();
 
             session()->flash('msg', 'Registro excluído com sucesso!');
@@ -150,6 +154,7 @@ class ProdutoController extends Controller
             session()->flash('erro', 'Erro ao excluir: ' . $e->getMessage());
             return redirect()->route('produto.index');
         }
+        
     }
 
     // Buscar produto

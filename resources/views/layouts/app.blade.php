@@ -111,14 +111,17 @@
           </a>
 
           <ul class="dropdown-menu">
-            <li><a href="/lacos" class="dropdown-item">Laços</a></li>
-            <li><a href="/bandanas" class="dropdown-item">Bandanas</a></li>
-            <li><a href="/roupas" class="dropdown-item">Roupas</a></li>
+            @foreach($categorias as $categoria)
+            <li>
+            <a href="{{ route('categoria', $categoria->id) }}" class="dropdown-item">{{ $categoria->nome }} </a>
+        </li>
+            @endforeach
+            
           </ul>
         </li>
 
         <li class="nav-item">
-          <a href="/" class="nav-link">Home</a>
+          <a href="{{ route('home') }}" class="nav-link">Home</a>
         </li>
       </ul>
 
