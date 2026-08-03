@@ -18,7 +18,7 @@ class Produto extends Model
         'precoReferencia',
         'imagem',
         'categoria_produtos_id',
-        'admin_id'
+        'user_id'
     ];
 
     // relacionamentode  produto pertence a categoria

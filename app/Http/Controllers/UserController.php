@@ -124,7 +124,7 @@ class UserController extends Controller
     {
         $filtro = trim((string) $request->input('filtro', ''));
 
-        $admins = User::where('nome', 'like', "%{$filtro}%")
+        $admins = User::where('name', 'like', "%{$filtro}%")
             ->orderBy('id')
             ->paginate(10);
 
