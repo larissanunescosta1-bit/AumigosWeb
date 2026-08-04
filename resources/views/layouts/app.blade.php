@@ -87,9 +87,16 @@
 
       <!-- USUÁRIO -->
       <div class="d-none d-lg-block ms-auto">
-          <a href="{{ route('meulogin') }}">
-        <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-         </a>
+           @if (Auth::check())
+        <a href="{{ route('perfilAdmin') }}">
+            <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+        </a>
+    @else
+        <a href="{{ route('meulogin') }}">
+            <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+        </a>
+    @endif
+
       </div>
 
     </nav>
@@ -101,7 +108,11 @@
       <h5>Menu</h5>
       <button class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
-
+ <div class="d-none d-lg-block ms-auto">
+          <a href="{{ route('meulogin') }}">
+        <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+         </a>
+      </div>
     <div class="offcanvas-body">
 
       <ul class="navbar-nav">

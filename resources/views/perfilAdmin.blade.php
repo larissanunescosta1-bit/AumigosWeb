@@ -5,9 +5,11 @@
 <link rel="stylesheet" href="{{ asset('css/menuAdmin.css') }}">
 
 <div class="menu-centralizado">
+     
     <div class="menu-box">
-
+ <h6 class="painel-titulo">Bem-vindo, {{Auth::user()->name }}</h6>
         <h4 class="painel-titulo">Painel Administrador</h4>
+      
 
         <ul class="nav flex-column">
 
@@ -31,9 +33,14 @@
 
             <li class="nav-item">
                 <a href="{{ route('home') }}" class="nav-link menu-lateral voltar-btn">
-                    Voltar
+                    Voltar Menu
                 </a>
             </li>
+
+            <form action="{{ route('logout') }}" method="POST">
+              @csrf
+            <button class="btn btn-primary btn-sm" type="submit">Sair Perfil</button>
+          </form>
 
         </ul>
     </div>
