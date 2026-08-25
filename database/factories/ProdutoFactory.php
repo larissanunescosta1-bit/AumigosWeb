@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Produto;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Admin;
+use App\Models\User;
 use App\Models\CategoriaProduto;
 
 /**
@@ -27,7 +27,7 @@ class ProdutoFactory extends Factory
             'imagem' => 'produto.jpg',
 
             'categoria_produtos_id' => CategoriaProduto::factory(),
-            'admin_id' => Admin::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }

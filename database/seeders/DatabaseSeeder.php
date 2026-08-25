@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\CategoriaProduto;
 use App\Models\Produto;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,8 +18,14 @@ class DatabaseSeeder extends Seeder
      */
    public function run(): void
 {
-    // Criar 2 admins
-        $admins = User::factory(2)->create();
+    // Criar 1 admin fixo 
+         User::firstOrCreate(
+            ['email' => 'lala@gmail.com'],
+            [
+                'name' => 'Lari',
+                'password' => Hash::make('1234'),
+            ]
+        );
 
         // Criar 3 categorias
         $categorias = CategoriaProduto::factory(3)->create();

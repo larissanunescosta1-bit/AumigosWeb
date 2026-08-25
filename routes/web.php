@@ -7,18 +7,18 @@ use App\Http\Controllers\CategoriaProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
 
-Route::middleware('auth')->group(function () {
+/*Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+*/
 Route::get('/', [SiteController::class, 'index'])->name('home');
-Route::get('/meulogin', [SiteController::class, 'meulogin'])
-    ->name('meulogin');
-Route::get('/perfilAdmin', [SiteController::class, 'perfilAdmin'])->middleware('auth')->name('perfilAdmin');
-Route::get('/categoria/{id}', [ProdutoController::class, 'categoria'])
-    ->name('categoria');
+Route::get('/meulogin', [SiteController::class, 'meulogin'])->name('meulogin');
 
+
+Route::middleware('auth')->group(function () {
+Route::get('/perfilAdmin', [SiteController::class, 'perfilAdmin'])->middleware('auth')->name('perfilAdmin');
 
 # ROTAS DE PRODUTO ================================================================================
 Route::get('/produto',                 [ProdutoController::class, 'index'])->name('produto.index');
@@ -40,6 +40,7 @@ Route::get('/categoriaProduto/{id}/view',      [CategoriaProdutoController::clas
 Route::post('/categoriaProduto/{id}/update',   [CategoriaProdutoController::class, 'update'])->name('categoriaProduto.update');
 Route::get('/categoriaProduto/{id}/destroy',   [CategoriaProdutoController::class, 'destroy'])->name('categoriaProduto.destroy');
 Route::get('/categoriaProduto/search',         [CategoriaProdutoController::class, 'search'])->name('categoriaProduto.search');
+Route::get('/categoria/{id}', [ProdutoController::class, 'categoria'])->name('categoria');
 
 # ROTAS DE ADMIN ==================================================================================
 Route::get('/admin',                 [UserController::class, 'index'])->name('admin.index');
@@ -49,4 +50,5 @@ Route::get('/admin/{id}/view',       [UserController::class, 'view'])->name('adm
 Route::post('/admin/{id}/update',    [UserController::class, 'update'])->name('admin.update');
 Route::get('/admin/{id}/destroy',    [UserController::class, 'destroy'])->name('admin.destroy');
 Route::get('/admin/search',          [UserController::class, 'search'])->name('admin.search');
+});
 require __DIR__.'/auth.php';

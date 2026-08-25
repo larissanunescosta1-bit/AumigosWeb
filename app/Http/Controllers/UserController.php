@@ -106,7 +106,11 @@ class UserController extends Controller
         try {
 
             $admin = User::find(decrypt($id));
-
+            //impede que o admin principal seja destruido 
+            if ($admin->id == 1) {
+            session()->flash('erro', 'O administrador principal não pode ser excluido');
+            return redirect()->route('admin.index');
+        }
             $admin->delete();
 
             session()->flash('msg', 'Registro excluído com sucesso!');
