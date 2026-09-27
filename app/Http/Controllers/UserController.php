@@ -110,6 +110,9 @@ class UserController extends Controller
             if ($admin->id == 1) {
             session()->flash('erro', 'O administrador principal não pode ser excluido');
             return redirect()->route('admin.index');
+
+             $id = decrypt($id);
+            if ($id == Auth::id()) {return redirect()->back()->with('erro', 'Você não pode excluir seu próprio usuário.');}
         }
             $admin->delete();
 

@@ -49,10 +49,12 @@
                 <td>{{ $categoriaProduto->nome }}</td>
                 <td>{{ $categoriaProduto->descricao }}</td>
                 <td>
+                    <div class="d-flex gap-1">
      <a title="Editar"  class="btn btn-warning btn-sm"  href="{{ route('categoriaProduto.view', $categoriaProduto->id) }}">Editar</a>
 
           <a title="Excluir"class="btn btn-danger btn-sm  btn-sm btn-excluir" href="{{ route('categoriaProduto.destroy', encrypt($categoriaProduto->id)) }}">Excluir</a>
-                </td>
+                 </div>
+        </td>
             </tr>
             @endforeach
         </tbody>

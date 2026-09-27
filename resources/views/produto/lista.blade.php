@@ -94,13 +94,23 @@
 </td>
 
                 <td>
-
+<div class="d-flex gap-1">
+    @if(Auth::id() == 1 || $produto->user_id == Auth::id())
                     <a title="Editar"class="btn btn-warning btn-sm" href="{{ route('produto.view', $produto->id) }}">Editar
                     </a>
+    @endif
 
-                    <a title="Excluir"class="btn btn-danger btn-sm btn-excluir" href="{{ route('produto.destroy', encrypt($produto->id)) }}">
-                        Excluir
-                    </a>
+    @if(Auth::id() == 1 || $produto->user_id == Auth::id())
+    <a title="Excluir"class="btn btn-danger btn-sm btn-excluir" href="{{ route('produto.destroy', encrypt($produto->id)) }}">
+            Excluir
+            </a>
+    @endif
+
+                    {{-- se o admin nao tiver acesso mostra apenas um tracinho--}}
+      @if(Auth::id() != 1 && $produto->user_id != Auth::id())
+    <span class="text-muted">—</span>
+     @endif
+                       </div>
                 </td>
             </tr>
         @endforeach

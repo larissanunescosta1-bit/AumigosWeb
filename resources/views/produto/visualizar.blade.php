@@ -120,13 +120,19 @@
                     name="user_id"
                     required>
 
-                @foreach($admins as $admin)
-                    <option value="{{ $admin->id }}"
-                        {{ old('user_id', $produto->user_id) == $admin->id ? 'selected' : '' }}>
-                        {{ $admin->name }}
-                    </option>
-                @endforeach
+                 @if(Auth::id() == 1)
+            {{-- o de id 1 pode escolher qualquer admin --}}
+            <option value="">Selecione um administrador</option>
+            @foreach($admins as $admin)
+                <option value="{{ $admin->id }}"{{ old('user_id') == $admin->id ? 'selected' : '' }}>{{ $admin->name }}</option>
+            @endforeach
 
+            @else
+
+            {{-- outros admin só podem escolher eles mesmos --}}
+            <option value="{{ Auth::id() }}" selected>{{ Auth::user()->name }}</option>
+
+        @endif
             </select>
 
             <div class="invalid-feedback">

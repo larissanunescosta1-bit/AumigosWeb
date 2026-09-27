@@ -110,14 +110,19 @@
         <select class="form-control @error('admin_id') is-invalid @enderror"
                 name="user_id"
                 required>
+            @if(Auth::id() == 1)
+            {{-- o de id 1 pode escolher qualquer admin --}}
             <option value="">Selecione um administrador</option>
-
             @foreach($admins as $admin)
-               <option value="{{ $admin->id }}">
-                    {{ old('user_id') == $admin->id ? 'selected' : '' }}>
-                    {{ $admin->name }}
-                </option>
+                <option value="{{ $admin->id }}"{{ old('user_id') == $admin->id ? 'selected' : '' }}>{{ $admin->name }}</option>
             @endforeach
+
+            @else
+
+            {{-- outros admin só podem escolher eles mesmos --}}
+            <option value="{{ Auth::id() }}" selected>{{ Auth::user()->name }}</option>
+
+        @endif
         </select>
 
         <div class="invalid-feedback">

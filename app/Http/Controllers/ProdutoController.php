@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\CategoriaProduto;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 class ProdutoController extends Controller
 {
     // Lista os produtos
@@ -51,6 +52,8 @@ class ProdutoController extends Controller
         $produto->precoReferencia = $request->precoReferencia;
         $produto->categoria_produtos_id = $request->categoria_produtos_id;
         $produto->user_id = $request->user_id;
+        // salva automaticamente o admin que esta  logado
+        $produto->user_id = Auth::id();
 
         if ($request->hasFile('imagem')) {
             $produto->imagem = $request->file('imagem')->store('produtos', 'public');
@@ -75,9 +78,14 @@ class ProdutoController extends Controller
         try {
 
             $produto = Produto::find($id);
+               // so o id 1 ou o quem criou o  produto pode editar
+        if (Auth::id() != 1 && $produto->user_id != Auth::id()) {
+            return redirect()->route('produto.index');
+        }
  $categorias = CategoriaProduto::all();
         $admins = User::all();
             return view('produto.visualizar', compact('produto','categorias','admins'));
+            
 
         } catch (\Exception $e) {
 
@@ -110,6 +118,10 @@ class ProdutoController extends Controller
         $produto->categoria_produtos_id = $request->categoria_produtos_id;
         $produto->user_id = $request->user_id;
 
+
+        if (Auth::id() != 1 && $produto->user_id != Auth::id()) {
+    return redirect()->route('produto.index');
+}
         // Atualiza a imagem somente se uma nova for enviada
         if ($request->hasFile('imagem')) {
 
@@ -139,6 +151,11 @@ class ProdutoController extends Controller
         try {
 
             $produto = Produto::find(decrypt($id));
+
+             // So o id 1 ou o riou o  produto pode excluir
+        if (Auth::id() != 1 && $produto->user_id != Auth::id()) {
+            return redirect()->route('produto.index');
+        }
 
             if (!empty($produto->imagem) && \Storage::disk('public')->exists($produto->imagem)) {
           \Storage::disk('public')->delete($produto->imagem);

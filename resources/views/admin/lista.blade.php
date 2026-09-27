@@ -52,11 +52,24 @@
                 <td>{{ $admin->name }}</td>
                 <td>{{ $admin->email }}</td>
                 <td>
-                
+           {{-- O administrador com id 1 pode editar qualquer administrador e os outros administradores so podem editar o proprio perfil--}}
+            @if(Auth::id() == 1 || $admin->id == Auth::id())    
           <a title="Editar"   class="btn btn-primary btn-sm"  href="{{ route('admin.view', $admin->id) }}">Editar</a>
+           @endif
+           
+                                                                                            
+{{-- Somente o administrador com ID 1 pode excluir os outros e ele não pode excluir a própria conta 
+--}}
+       @if(Auth::id() == 1 && $admin->id != 1)
+       <a title="Excluir"class="btn btn-danger btn-sm  btn-sm btn-excluir" href="{{ route('admin.destroy', encrypt($admin->id)) }}">Excluir</a>
+      @endif
 
-          <a title="Excluir"class="btn btn-danger btn-sm  btn-sm btn-excluir" href="{{ route('admin.destroy', encrypt($admin->id)) }}">Excluir</a>
-      
+      {{-- Se nao for o administrador ID 1 e tambem nao foro próprio usuario nao aparece nenhum botao.Entao mostra o tracinho
+--}}
+      @if(Auth::id() != 1 && $admin->id != Auth::id())
+    <span class="text-muted">—</span>
+     @endif
+     
                 </td>
             </tr>
             @endforeach

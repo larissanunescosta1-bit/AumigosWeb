@@ -82,7 +82,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">Home</a>
+            <a href="{{ route('home') }}" class="nav-link">Home</a>
           </li>
         </ul>
       </div>
@@ -110,11 +110,7 @@
       <h5>Menu</h5>
       <button class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
- <div class="d-none d-lg-block ms-auto">
-          <a href="{{ route('meulogin') }}">
-        <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-         </a>
-      </div>
+
     <div class="offcanvas-body">
 
       <ul class="navbar-nav">
@@ -131,6 +127,14 @@
             @endforeach
             
           </ul>
+      
+        </li>
+
+        <li class="nav-item">
+          <a href="{{ route('home')}}" class="nav-link">Home</a>
+        </li>
+      </ul>
+      <hr>
           <div class="text-center mb-3">
     @if (Auth::check())
         <a href="{{ route('perfilAdmin') }}">
@@ -142,15 +146,7 @@
         </a>
     @endif
 </div>
-        </li>
-
-        <li class="nav-item">
-          <a href="{{ route('home') }}" class="nav-link">Home</a>
-        </li>
-      </ul>
-
-      <hr>
-
+<hr>
       <!-- CONTATO MOBILE -->
       <div class="text-center">
         <small>Telefone</small>

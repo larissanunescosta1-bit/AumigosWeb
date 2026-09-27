@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CategoriaProduto;
+use App\Models\Produto;
 
 class CategoriaProdutoController extends Controller
 {
@@ -101,7 +102,15 @@ class CategoriaProdutoController extends Controller
 
             $categoriaProduto = CategoriaProduto::find(decrypt($id));
 
-            $categoriaProduto->delete();
+            // Ve se nao tem  produtos usando essa categoria
+        $temProdutos = Produto::where('categoria_produtos_id',$categoriaProduto->id)->exists();
+        // se tiver produtos nao deixa excluir
+        if ($temProdutos) {
+            session()->flash('erro','Não é possível excluir esta categoria porque existem produtos cadastrados nela');
+            return redirect()->route('categoriaProduto.index');}
+
+        // Se não tiver produtos, pode excluir
+          $categoriaProduto->delete();
 
             session()->flash('msg', 'Registro excluído com sucesso!');
             return redirect()->route('categoriaProduto.index');
