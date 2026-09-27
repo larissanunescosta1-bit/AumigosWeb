@@ -34,7 +34,7 @@
             <button class="btn btn-primary" type="submit">Pesquisar</button>
         </div>
     </form>
-
+<div class="table-responsive">
     <table class="table table-bordered table-hover text-center align-middle">
         <thead>
             <tr>
@@ -62,5 +62,6 @@
             @endforeach
         </tbody>
     </table>
+      </div>
     </div>
 @endsection

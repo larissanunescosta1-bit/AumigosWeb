@@ -2,9 +2,11 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AuMigos</title>
 
-   
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -55,7 +57,7 @@
     <nav class="navbar navbar-expand-lg">
 
       <!-- MOBILE TEXTO -->
-      <span class="d-lg-none">Acessórios pets</span>
+      <span class="d-lg-none me-auto">Acessórios pets</span>
 
       <!-- BOTÃO -->
       <button class="navbar-toggler ms-auto"
@@ -129,6 +131,17 @@
             @endforeach
             
           </ul>
+          <div class="text-center mb-3">
+    @if (Auth::check())
+        <a href="{{ route('perfilAdmin') }}">
+            <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+        </a>
+    @else
+        <a href="{{ route('meulogin') }}">
+            <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+        </a>
+    @endif
+</div>
         </li>
 
         <li class="nav-item">

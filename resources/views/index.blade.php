@@ -1,10 +1,12 @@
  @extends('layouts.app')
 
 @section('content')
+ <div class="container">
       <div class="isotope-container row">
           @foreach($produtos as $produto)
 
-        <div class="item cat col-md-4 col-lg-3 my-4">
+  
+       <div class="item cat col-md-4 col-lg-3 my-4">
         
           <div class="card position-relative">
           <img src="{{ asset('storage/' . $produto->imagem) }}"class="img-fluid rounded-4" alt="{{ $produto->nome }}">
@@ -31,6 +33,6 @@
 
       
     </div>
-
+</div>
     @endsection
   

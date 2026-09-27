@@ -47,7 +47,7 @@
             </button>
         </div>
     </form>
-
+<div class="table-responsive">
     <table class="table table-bordered table-hover text-center align-middle">
         <thead>
             <tr>
@@ -106,6 +106,7 @@
         @endforeach
         </tbody>
     </table>
+    </div>
     <div class="mt-3">
         {{ $produtos->links() }}
     </div>
