@@ -26,11 +26,15 @@
 
     <div class="mb-3">
         <label>Senha</label>
-        <input type="password" name="password" class="form-control  @error('password') is-invalid @enderror" id="password" value="{{ old('password', $admin->password) }}" required >
+        <input type="password" name="password" class="form-control  @error('password') is-invalid @enderror" id="password"  >
    <div class="invalid-feedback">
                 @error('password') {{ $message }} @enderror
             </div>
     </div>
+    <div class="mb-3">
+    <label>Confirmar nova senha</label>
+    <input type="password" name="password_confirmation" class="form-control">
+</div>
 
     <button type="submit" class="btn btn-primary">
         Salvar alterações

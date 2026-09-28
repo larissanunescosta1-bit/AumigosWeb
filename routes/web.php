@@ -15,7 +15,7 @@ use App\Http\Controllers\SiteController;
 */
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/meulogin', [SiteController::class, 'meulogin'])->name('meulogin');
-
+Route::get('/categoria/{id}', [ProdutoController::class, 'categoria'])->name('categoria');
 
 Route::middleware('auth')->group(function () {
 Route::get('/perfilAdmin', [SiteController::class, 'perfilAdmin'])->middleware('auth')->name('perfilAdmin');
@@ -40,7 +40,7 @@ Route::get('/categoriaProduto/{id}/view',      [CategoriaProdutoController::clas
 Route::post('/categoriaProduto/{id}/update',   [CategoriaProdutoController::class, 'update'])->name('categoriaProduto.update');
 Route::get('/categoriaProduto/{id}/destroy',   [CategoriaProdutoController::class, 'destroy'])->name('categoriaProduto.destroy');
 Route::get('/categoriaProduto/search',         [CategoriaProdutoController::class, 'search'])->name('categoriaProduto.search');
-Route::get('/categoria/{id}', [ProdutoController::class, 'categoria'])->name('categoria');
+
 
 # ROTAS DE ADMIN ==================================================================================
 Route::get('/admin',                 [UserController::class, 'index'])->name('admin.index');
