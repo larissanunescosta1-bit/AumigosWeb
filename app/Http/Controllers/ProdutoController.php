@@ -7,6 +7,7 @@ use App\Models\Produto;
 use App\Models\CategoriaProduto;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Cloudinary\Cloudinary;
 class ProdutoController extends Controller
 {
     // Lista os produtos
@@ -55,15 +56,10 @@ class ProdutoController extends Controller
         // salva automaticamente o admin que esta  logado
         $produto->user_id = Auth::id();
 
-       if ($request->hasFile('imagem')) {
-    $imagem = $request->file('imagem')->storeOnCloudinary('produtos');
-    $produto->imagem = $imagem->getSecurePath();
-}
-
-        $produto->save();
-
-        session()->flash('msg', 'Armazenado com sucesso!');
-        return redirect()->route('produto.index');
+   if ($request->hasFile('imagem')) {
+            $produto->imagem = $request->file('imagem')->store('produtos', 'cloudinary');
+        }
+          $produto->save();
 
     } catch (\Exception $e) {
 
@@ -124,12 +120,17 @@ class ProdutoController extends Controller
     return redirect()->route('produto.index');
 }
         // Atualiza a imagem somente se uma nova for enviada
-        if ($request->hasFile('imagem')) {
-    $imagem = $request->file('imagem')->storeOnCloudinary('produtos');
+  
+if ($request->hasFile('imagem')) {
+    $cloudinary = new \Cloudinary\Cloudinary();
 
-    $produto->imagem = $imagem->getSecurePath();
+    $resultado = $cloudinary->uploadApi()->upload(
+        $request->file('imagem')->getRealPath(),
+        ['folder' => 'produtos']
+    );
+
+    $produto->imagem = $resultado['secure_url'];
 }
-
         $produto->save();
 
         session()->flash('msg', 'Atualizado com sucesso!');

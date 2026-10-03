@@ -9,7 +9,8 @@
        <div class="item cat col-md-4 col-lg-3 my-4">
         
           <div class="card position-relative">
-          <img src="{{ asset('storage/' . $produto->imagem) }}"class="img-fluid rounded-4" alt="{{ $produto->nome }}">
+          <img src="{{ $produto->imagem  }}"class="img-fluid rounded-4" alt="{{ $produto->nome }}">
+          
             <div class="card-body p-0">
               
                 <h3 class="card-title pt-4 m-0">  {{ $produto->nome }} </h3>
