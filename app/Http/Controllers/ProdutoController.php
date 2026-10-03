@@ -55,9 +55,10 @@ class ProdutoController extends Controller
         // salva automaticamente o admin que esta  logado
         $produto->user_id = Auth::id();
 
-        if ($request->hasFile('imagem')) {
-            $produto->imagem = $request->file('imagem')->store('produtos', 'public');
-        }
+       if ($request->hasFile('imagem')) {
+    $imagem = $request->file('imagem')->storeOnCloudinary('produtos');
+    $produto->imagem = $imagem->getSecurePath();
+}
 
         $produto->save();
 
@@ -124,14 +125,10 @@ class ProdutoController extends Controller
 }
         // Atualiza a imagem somente se uma nova for enviada
         if ($request->hasFile('imagem')) {
+    $imagem = $request->file('imagem')->storeOnCloudinary('produtos');
 
-            // Remove a imagem antiga (caso exista)
-            if (!empty($produto->imagem) && \Storage::disk('public')->exists($produto->imagem)) {
-                \Storage::disk('public')->delete($produto->imagem);
-            }
-
-            $produto->imagem = $request->file('imagem')->store('produtos', 'public');
-        }
+    $produto->imagem = $imagem->getSecurePath();
+}
 
         $produto->save();
 
@@ -157,9 +154,8 @@ class ProdutoController extends Controller
             return redirect()->route('produto.index');
         }
 
-            if (!empty($produto->imagem) && \Storage::disk('public')->exists($produto->imagem)) {
-          \Storage::disk('public')->delete($produto->imagem);
-}
+         
+// A imagem está no Cloudinary, então não apagar pelo armazenamento local.
 
             $produto->delete();
 
