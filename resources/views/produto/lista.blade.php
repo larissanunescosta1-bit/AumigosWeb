@@ -68,9 +68,8 @@
             <tr>
            <td>{{ $produto->id }}</td>
 
-          <td>
-                    @if($produto->imagem)
-                         <img src="{{ asset('storage/'.$produto->imagem) }}"
+          <td> @if($produto->imagem)
+                        <img src="{{ asset('storage/'.$produto->imagem) }}"
                              width="80"
                              height="80"
                              style="object-fit:cover; border-radius:8px;">
