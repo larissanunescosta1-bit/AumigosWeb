@@ -7,7 +7,6 @@ use App\Models\Produto;
 use App\Models\CategoriaProduto;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Cloudinary\Cloudinary;
 class ProdutoController extends Controller
 {
     // Lista os produtos
@@ -56,10 +55,14 @@ class ProdutoController extends Controller
         // salva automaticamente o admin que esta  logado
         $produto->user_id = Auth::id();
 
-   if ($request->hasFile('imagem')) {
-            $produto->imagem = $request->file('imagem')->store('produtos', 'cloudinary');
+        if ($request->hasFile('imagem')) {
+            $produto->imagem = $request->file('imagem')->store('produtos', 'public');
         }
-          $produto->save();
+
+        $produto->save();
+
+        session()->flash('msg', 'Armazenado com sucesso!');
+        return redirect()->route('produto.index');
 
     } catch (\Exception $e) {
 
@@ -120,17 +123,16 @@ class ProdutoController extends Controller
     return redirect()->route('produto.index');
 }
         // Atualiza a imagem somente se uma nova for enviada
-  
-if ($request->hasFile('imagem')) {
-    $cloudinary = new \Cloudinary\Cloudinary();
+        if ($request->hasFile('imagem')) {
 
-    $resultado = $cloudinary->uploadApi()->upload(
-        $request->file('imagem')->getRealPath(),
-        ['folder' => 'produtos']
-    );
+            // Remove a imagem antiga (caso exista)
+            if (!empty($produto->imagem) && \Storage::disk('public')->exists($produto->imagem)) {
+                \Storage::disk('public')->delete($produto->imagem);
+            }
 
-    $produto->imagem = $resultado['secure_url'];
-}
+            $produto->imagem = $request->file('imagem')->store('produtos', 'public');
+        }
+
         $produto->save();
 
         session()->flash('msg', 'Atualizado com sucesso!');
@@ -155,8 +157,9 @@ if ($request->hasFile('imagem')) {
             return redirect()->route('produto.index');
         }
 
-         
-// A imagem está no Cloudinary, então não apagar pelo armazenamento local.
+            if (!empty($produto->imagem) && \Storage::disk('public')->exists($produto->imagem)) {
+          \Storage::disk('public')->delete($produto->imagem);
+}
 
             $produto->delete();
 
