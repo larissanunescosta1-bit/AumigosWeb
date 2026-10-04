@@ -70,7 +70,7 @@
 
           <td>
                     @if($produto->imagem)
-                        <img src="{{$produto->imagem) }}"
+                        <img src="{{$produto->imagem }}">
                              width="80"
                              height="80"
                              style="object-fit:cover; border-radius:8px;">
