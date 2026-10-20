@@ -118,9 +118,22 @@ class UserController extends Controller
             session()->flash('msg', 'Registro excluído com sucesso!');
             return redirect()->route('admin.index');
 
-        } catch (\Exception $e) {
+        }   catch (\Illuminate\Database\QueryException $e) {
 
-            session()->flash('erro', 'Erro ao excluir: ' . $e->getMessage());
+        session()->flash(
+            'erro',
+            'Não foi possível excluir este usuário, pois ele possui produtos cadastrados.'
+        );
+
+        return redirect()->route('admin.index');
+
+        
+        } catch (\Exception $e) {
+ session()->flash(
+            'erro',
+            'Ocorreu um erro ao excluir o usuário. Tente novamente.'
+        );
+           
             return redirect()->route('admin.index');
         }
     }
