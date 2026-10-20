@@ -31,7 +31,7 @@
         </div>
     @endif
 
-    <form class="mb-3" method="GET" action="{{ route('produto.search') }}">
+    <form class="mb-3" method="GET" action="{{ route('produto.search') }}"enctype="multipart/form-data">
         <div class="input-group">
             <input
                 id="filtro"

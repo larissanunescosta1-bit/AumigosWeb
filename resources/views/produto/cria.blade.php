@@ -33,6 +33,7 @@
                name="precoReferencia"
                value="{{ old('precoReferencia') }}"
                placeholder="Digite o preço"
+                step="0.01"
                required>
 
         <div class="invalid-feedback">

@@ -7,6 +7,7 @@ use App\Models\Produto;
 use App\Models\CategoriaProduto;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 class ProdutoController extends Controller
 {
     // Lista os produtos
@@ -55,9 +56,10 @@ class ProdutoController extends Controller
         // salva automaticamente o admin que esta  logado
         $produto->user_id = Auth::id();
 
-        if ($request->hasFile('imagem')) {
-            $produto->imagem = $request->file('imagem')->store('produtos', 'public');
-        }
+  if ($request->hasFile('imagem')) {
+    $produto->imagem = $request->file('imagem')
+        ->store('produtos', 'public');
+}
 
         $produto->save();
 
@@ -126,11 +128,18 @@ class ProdutoController extends Controller
         if ($request->hasFile('imagem')) {
 
             // Remove a imagem antiga (caso exista)
-            if (!empty($produto->imagem) && \Storage::disk('public')->exists($produto->imagem)) {
-                \Storage::disk('public')->delete($produto->imagem);
-            }
+            
+if ($request->hasFile('imagem')) {
 
-            $produto->imagem = $request->file('imagem')->store('produtos', 'public');
+    // Remove a imagem antiga do volume
+    if (!empty($produto->imagem)) {
+        Storage::disk('public')->delete($produto->imagem);
+    }
+
+    // Salva a nova imagem no volume do Wasmer
+    $produto->imagem = $request->file('imagem')
+        ->store('produtos', 'public');
+}
         }
 
         $produto->save();
@@ -157,8 +166,8 @@ class ProdutoController extends Controller
             return redirect()->route('produto.index');
         }
 
-            if (!empty($produto->imagem) && \Storage::disk('public')->exists($produto->imagem)) {
-          \Storage::disk('public')->delete($produto->imagem);
+          if (!empty($produto->imagem)) {
+    Storage::disk('public')->delete($produto->imagem);
 }
 
             $produto->delete();

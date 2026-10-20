@@ -17,7 +17,7 @@ return new class extends Migration
     $table->text('descricaoCurta');
     $table->text('descricaoGeral');
     $table->float('precoReferencia');
-    $table->string('imagem');
+   $table->string('imagem');
 
     // aqui são as chaves estrangeiras da tabela
     // sempre tem que colocar a tabela depois o foreignId com o id das outras tabelas e depois o constrained 

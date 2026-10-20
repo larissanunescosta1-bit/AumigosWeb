@@ -19,3 +19,7 @@ locality:
   regions:
     - fr-roub1
 app_id: da_RrWI0t5UDmXZ
+
+volumes:
+  - name: storage
+    mount: /app/public/storage
