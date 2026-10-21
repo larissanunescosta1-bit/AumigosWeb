@@ -77,11 +77,11 @@ return [
     | set to any locale for which you plan to have translation strings.
     |
     */
-'locale' => 'pt_BR',
+    'locale' => 'pt_BR',
 
-'fallback_locale' => 'pt_BR',
+    'fallback_locale' => 'pt_BR',
 
-'faker_locale' => 'pt_BR',
+    'faker_locale' => 'pt_BR',
 
     /*
     |--------------------------------------------------------------------------

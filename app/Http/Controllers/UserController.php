@@ -31,7 +31,7 @@ class UserController extends Controller
         $request->validate([
             'name'  => 'required|max:20',
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'required|string|min:8|confirmed'
         ]);
 
         try {
@@ -77,7 +77,7 @@ class UserController extends Controller
         $request->validate([
             'name'  => 'required|max:20',
             'email' => 'required',
-            'password' => 'confirmed|min:8',
+            'password' => 'nullable|string|min:8|confirmed'
         ]);
 
         try {
@@ -86,7 +86,9 @@ class UserController extends Controller
 
             $admin->name = $request->name;
             $admin->email = $request->email;
-             $admin->password = Hash::make($request->password);
+             if ($request->filled('password')) {
+    $admin->password = Hash::make($request->password);
+}
             $admin->save();
 
             session()->flash('msg', 'Atualizado com sucesso!');

@@ -31,8 +31,9 @@
         <div class="mb-3">
             <label>Senha</label>
             <input 
+            placeholder="Digite a senha (mínimo 8 caracteres)"
                 type="password" 
-                class="form-control   @error('password') is-invalid @enderror" id="password" value="{{ old('password') }}" name="password"  placeholder="Digite a senha" required>
+                class="form-control   @error('password') is-invalid @enderror" id="password" value="{{ old('password') }}" name="password"  placeholder="Digite a senha" required minlength="8">
          <div class="invalid-feedback">
                 @error('password') {{ $message }} @enderror
             </div>

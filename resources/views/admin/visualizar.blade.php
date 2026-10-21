@@ -26,14 +26,15 @@
 
     <div class="mb-3">
         <label>Senha</label>
-        <input type="password" name="password" class="form-control  @error('password') is-invalid @enderror" id="password"  >
+        <input 
+        placeholder="Digite a senha (mínimo 8 caracteres)"type="password" name="password" class="form-control  @error('password') is-invalid @enderror" id="password"minlength="8"  >
    <div class="invalid-feedback">
                 @error('password') {{ $message }} @enderror
             </div>
     </div>
     <div class="mb-3">
     <label>Confirmar nova senha</label>
-    <input type="password" name="password_confirmation" class="form-control">
+    <input type="password" name="password_confirmation" class="form-control" minlength="8">
 </div>
 
     <button type="submit" class="btn btn-primary">
