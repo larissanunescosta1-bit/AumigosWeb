@@ -2,7 +2,7 @@
 
 @section('content')
  <div class="container">
-      <div class="isotope-container row">
+      <  <div class="row">
           @foreach($produtos as $produto)
 
   
