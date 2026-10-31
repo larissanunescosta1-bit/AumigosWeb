@@ -30,6 +30,7 @@ class CategoriaProdutoController extends Controller
     {
         $request->validate([
             'nome' => 'required|max:100',
+            'descricao' => 'required|string',
         ]);
 
         try {

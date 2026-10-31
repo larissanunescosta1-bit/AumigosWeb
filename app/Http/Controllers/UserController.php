@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name'  => 'required|max:20',
-            'email' => 'required',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed'
         ]);
 
@@ -59,7 +59,7 @@ class UserController extends Controller
     {
        try {
 
-       $admin = User::find($id);  
+       $admin = User::findOrFail($id);  
  return view('admin.visualizar', [
             'admin' => $admin
         ]);
@@ -82,7 +82,7 @@ class UserController extends Controller
 
         try {
 
-             $admin = User::find($id);
+             $admin = User::findOrFail($id);
 
             $admin->name = $request->name;
             $admin->email = $request->email;
@@ -106,14 +106,11 @@ class UserController extends Controller
     {
         try {
 
-            $admin = User::find(decrypt($id));
+            $admin = User::findOrFail(decrypt($id));
             //impede que o admin principal seja destruido 
             if ($admin->id == 1) {
             session()->flash('erro', 'O administrador principal não pode ser excluido');
             return redirect()->route('admin.index');
-
-             $id = decrypt($id);
-            if ($id == Auth::id()) {return redirect()->back()->with('erro', 'Você não pode excluir seu próprio usuário.');}
         }
             $admin->delete();
 

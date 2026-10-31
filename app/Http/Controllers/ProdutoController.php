@@ -52,9 +52,11 @@ class ProdutoController extends Controller
         $produto->descricaoGeral = $request->descricaoGeral;
         $produto->precoReferencia = $request->precoReferencia;
         $produto->categoria_produtos_id = $request->categoria_produtos_id;
-        $produto->user_id = $request->user_id;
-        // salva automaticamente o admin que esta  logado
-        $produto->user_id = Auth::id();
+        if (Auth::id() == 1) {
+      $produto->user_id = $request->user_id; //aqui o admin principal vai poder selecionar outros admins la no fomulario
+     } else {
+        // salva automaticamente o admin que esta  logado ( sem ser o principal)
+        $produto->user_id = Auth::id(); }
 
   if ($request->hasFile('imagem')) {
     $produto->imagem = $request->file('imagem')
@@ -111,19 +113,22 @@ class ProdutoController extends Controller
 
     try {
 
-        $produto = Produto::find($id);
+        $produto = Produto::findOrFail($id);
+         // ve se o admin pode editar ou nao o produto 
+        if (Auth::id() != 1 && $produto->user_id != Auth::id()) {
+            return redirect()->route('produto.index');
+        }
 
         $produto->nome = $request->nome;
         $produto->descricaoCurta = $request->descricaoCurta;
         $produto->descricaoGeral = $request->descricaoGeral;
         $produto->precoReferencia = $request->precoReferencia;
         $produto->categoria_produtos_id = $request->categoria_produtos_id;
-        $produto->user_id = $request->user_id;
+        
 
-
-        if (Auth::id() != 1 && $produto->user_id != Auth::id()) {
-    return redirect()->route('produto.index');
-}
+ // aqui so o admin princiapal pode escolher o quem ele quer
+        if (Auth::id() == 1 ) {
+     $produto->user_id = $request->user_id;;}
         // Atualiza a imagem somente se uma nova for enviada
         if ($request->hasFile('imagem')) {
 
